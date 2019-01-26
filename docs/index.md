@@ -3,15 +3,13 @@ layout: default
 title: Home
 ---
 
-**SuperPull** is a CLI Application written in NodeJS for quickly bringing many local git repositories up to date. The project was created after searching on Github and failing to find a tool that did *exactly this*, though another program exists that clones all repos for a given user. I'm writing this program for myself, but have decided to place it on GitHub so others might see and use the tool. Download the latest compiled binary for GNU/Linux [here](https://github.com/RyanFleck/SuperPull/releases/latest). 
+**SuperPull** is a CLI Application written in NodeJS for quickly bringing many local git repositories up to date. The project was created after searching on Github and failing to find a tool that did *exactly this*, though another program exists that clones all repos for a given user. I'm writing this program for myself, but have decided to place it on GitHub so others might see and use the tool.
 
-<br />
+Download the latest compiled binary for GNU/Linux [here](https://github.com/RyanFleck/SuperPull/releases/latest). 
 
-<h3>Contents</h3>
+<h2>Contents</h2>
 1. TOC
 {:toc}
-
-<br />
 
 # Installation
 
