@@ -1,5 +1,7 @@
 # SuperPull
 
+[![Build Status](https://travis-ci.com/RyanFleck/SuperPull.svg?branch=master)](https://travis-ci.com/RyanFleck/SuperPull)
+
 CLI Program to fetch remote branches and commits for a collection of local repositories.
 
 Documentation available at <https://ryanfleck.github.io/SuperPull/>

@@ -7,6 +7,8 @@ title: Home
 
 Download the latest compiled binary for GNU/Linux [here](https://github.com/RyanFleck/SuperPull/releases/latest). 
 
+[![Build Status](https://travis-ci.com/RyanFleck/SuperPull.svg?branch=master)](https://travis-ci.com/RyanFleck/SuperPull)
+
 <h2>Contents</h2>
 1. TOC
 {:toc}
