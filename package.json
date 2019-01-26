@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --fix superpull.js"
+    "lint": "eslint --fix superpull.js",
+    "build":"pkg . --target host --output bin/superpull"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,11 @@
   "devDependencies": {
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.15.0"
+    "eslint-plugin-import": "^2.15.0",
+    "pkg": "^4.3.7"
+  },
+  "bin": "superpull.js",
+  "pkg": {
+    "assets": "node_modules/**/*"
   }
 }
