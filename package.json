@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/RyanFleck/SuperPull/issues"
   },
-  "homepage": "https://github.com/RyanFleck/SuperPull#readme",
+  "homepage": "https://ryanfleck.github.io/SuperPull/",
   "dependencies": {
     "chalk": "^2.4.2",
     "child_process": "^1.0.2",
