@@ -29,15 +29,18 @@ const exec = require('child_process').exec;
 const config = require('os').homedir().concat('/.superpull');
 
 /* Section One:
- *   Check for config file, create if not found.
+ *   Check for config file, create if not found, print instructions, exit.
  */
 
 if (!fs.existsSync(config)) {
     console.log(`Superpull config ${chalk.red('missing')}! Adding at ${config}`);
     fs.writeFileSync(config, '', 'utf8', (err) => {
         console.log(`${chalk.red('Failed')} to write ~/.superpull\n${err}\nExiting...`);
-        process.exit();
+    process.exit();
     });
+    console.log('Add current directory with:\n\n\tsuperpull -a\n');
+    console.log('Add directory at a location with:\n\n\tsuperpull -a <full-path-to-directory>\n');
+    process.exit();
 }
 
 
@@ -45,9 +48,26 @@ if (!fs.existsSync(config)) {
  *   Configuration file processing tools.
  */
 
-const getArrayOfDirs = () => 0;
-const addDirToConfig = () => 0; 
+const getArrayOfDirs = () => {
+    return fs.readFileSync(config).toString().split('\n').filter(x=>x!='');
+};
 
+console.log(getArrayOfDirs());
+
+const addDirToConfig = (fullpath) => {
+    fs.appendFileSync(config, '\n'.concat(fullpath), (e) => {
+        console.log(`Failed to modify ~/.superpull.\nFull path: ${config}\nDir: ${fullpath}\n${e}`);
+        process.exit();
+    });
+};
+
+const dirIsGitRepo = (path) => {
+    try{
+        return (fs.statSync(path).isDirectory());
+    }catch(e){
+        return false;
+    }
+}
 
 /* Section Three:
  *   Program Functions.
@@ -55,14 +75,23 @@ const addDirToConfig = () => 0;
 
 const addDir = (dir, cmd) => {
     console.log(`${chalk.red('Add Dir to Config')}!`);
+
+    console.log(dir);
+    console.log(cmd);
 };
 
 const listDirs = (dir, cmd) => {
     console.log(`${chalk.yellow('List Config Dirs')}!`);
+
+    console.log(dir);
+    console.log(cmd);
 };
 
-const superPull = () => {
+const superPull = (dir,cmd) => {
     console.log(`${chalk.green('SuperPull')}!`);
+
+    console.log(dir);
+    console.log(cmd);
 };
 
 const main = (dir, cmd) => {
