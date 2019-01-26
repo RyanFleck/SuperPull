@@ -26,7 +26,7 @@ const prog = require('commander');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
-const { exec, execSync } = require('child_process');
+const { exec } = require('child_process');
 const config = require('os').homedir().concat('/.superpull');
 
 /* Section One:
@@ -49,7 +49,7 @@ if (!fs.existsSync(config)) {
  *   Configuration file processing tools.
  */
 
-const getArrayOfDirs = () => fs.readFileSync(config).toString().split('\n').filter(x => x != '');
+const getArrayOfDirs = () => fs.readFileSync(config).toString().split('\n').filter(x => x !== '');
 
 const checkIfAlreadyInFile = fullpath => getArrayOfDirs().some(x => x === fullpath.trim());
 
@@ -60,9 +60,9 @@ const addDirToConfig = (fullpath) => {
     });
 };
 
-const dirIsGitRepo = (path) => {
+const dirIsGitRepo = (gitrepo) => {
     try {
-        return (fs.statSync(path).isDirectory());
+        return (fs.statSync(gitrepo).isDirectory());
     } catch (e) {
         return false;
     }
@@ -96,31 +96,18 @@ const pullAndFetch = (directory) => {
  */
 
 const addDir = (dir, cmd) => {
-    console.log(dir);
-    console.log(`${chalk.red('Add Dir to Config')}!`);
-    console.log(`Add is a string? >> ${(typeof dir.add === 'string')}`);
-
-    let newDir = '';
-
-    if (typeof dir.add === 'string') {
-        newDir = path.resolve(dir.add);
-    } else {
-        newDir = process.cwd();
-    }
+    const newDir = (typeof dir.add === 'string') ? path.resolve(dir.add) : process.cwd();
 
     console.log(`Adding ${newDir} to ~/.superpull`);
 
     if (!dirIsGitRepo(newDir.concat('/.git'))) {
-        console.log(`Dir is ${chalk.red('NOT')} git repo.`);
-        console.log(newDir);
+        console.log(`${chalk.red('Error')}: Directory ${newDir} is ${chalk.red('not')} a git repository.`);
         process.exit(1);
     } else {
-        console.log('Dir is git repo.');
-        console.log(newDir);
         if (!checkIfAlreadyInFile(newDir)) {
             addDirToConfig(newDir);
         } else {
-            console.log('Dir already in file!');
+            console.log(`${chalk.red('Error')}: Directory ${newDir} is already listed in ~/.superpull`);
             process.exit(1);
         }
         process.exit(0);
@@ -132,8 +119,8 @@ const listDirs = (dir, cmd) => {
 };
 
 const superPull = (dir, cmd) => {
-    console.log(`${chalk.green('SuperPull')} directories.\n`);
-    getArrayOfDirs().forEach((dir, i) => {
+    console.log(`${chalk.green('SuperPull')} repositories.\n`);
+    getArrayOfDirs().forEach((dir) => {
         pullAndFetch(dir);
     });
 };
