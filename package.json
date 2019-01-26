@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --fix superpull.js",
-    "build":"pkg . --target host --output bin/superpull --debug"
-    "cibuild":"pkg . --target host --output bin/superpull"
+    "build":"pkg . --target host --output bin/superpull --debug",
+    "travis-build":"pkg . --target host --output bin/superpull"
   },
   "repository": {
     "type": "git",
