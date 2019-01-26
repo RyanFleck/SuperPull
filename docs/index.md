@@ -23,6 +23,12 @@ Prerequisites:
 
 The program shouldn't have any problems building and running on *MacOS*, but I don't own any Apple machines to compile and provide an executable.
 
+To install, simply download the latest compiled binary for GNU/Linux [here](https://github.com/RyanFleck/SuperPull/releases/latest) and place it in a bin accessible from your PATH. On Debian, the best place to do this is `/home/username/bin`. You can add this folder to your `~/.profile` if the script will not run after being placed in the bin:
+
+```sh
+PATH="$HOME/bin:$PATH"
+```
+
 # Basic Usage
 
 If directories have been added to your `~/.superpull` file, simply typing `superpull` in your shell will run the program, and output will show all successful and failed attepts to pull/fetch remote branches.
