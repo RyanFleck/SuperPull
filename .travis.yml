@@ -2,4 +2,4 @@ language: node_js
 node_js: lts/* 
 script:
   - node superpull.js
-  - npm run build
+  - npm run cibuild
