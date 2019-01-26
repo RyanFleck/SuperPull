@@ -29,12 +29,6 @@ const exec = require('child_process').exec;
 const config = require('os').homedir().concat('/.superpull');
 
 /* Section One:
- *   File processing tools.
- */
-
-const getArrayOfDirs = () => [];
-
-/* Section Two:
  *   Check for config file, create if not found.
  */
 
@@ -45,6 +39,15 @@ if (!fs.existsSync(config)) {
         process.exit();
     });
 }
+
+
+/* Section Two:
+ *   Configuration file processing tools.
+ */
+
+const getArrayOfDirs = () => 0;
+const addDirToConfig = () => 0; 
+
 
 /* Section Three:
  *   Program Functions.

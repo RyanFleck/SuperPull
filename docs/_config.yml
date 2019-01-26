@@ -4,6 +4,7 @@ name: SuperPull
 title: SuperPull
 descripton: SuperPull
 show_downloads: true
+logo: logo.png 
 
 # Setup
 title:        SuperPull
