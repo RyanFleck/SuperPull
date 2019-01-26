@@ -4,3 +4,5 @@ script:
   - node superpull.js
   - npm run travis-build
 
+notifications:
+  email: false
