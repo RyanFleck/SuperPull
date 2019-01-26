@@ -26,7 +26,7 @@ const prog = require('commander');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
-const exec = require('child_process').exec;
+const { exec, execSync } = require('child_process');
 const config = require('os').homedir().concat('/.superpull');
 
 /* Section One:
@@ -54,7 +54,7 @@ const getArrayOfDirs = () => {
 };
 
 const checkIfAlreadyInFile = (fullpath) => {
-    return fs.readFileSync(config).toString().split('\n').some(x => x === fullpath);
+    return getArrayOfDirs().some(x => x === fullpath.trim());
 }
 
 const addDirToConfig = (fullpath) => {
@@ -81,8 +81,21 @@ const prettyPrintConfig = () => {
     console.log('\n');
 }
 
-
 /* Section Three:
+ *   Git functions.
+ */
+
+const handleGitCallback = ( err, stdout, stderr) => {
+    if (err) console.log("exec error: " + err);
+    if (stdout) console.log(stdout);
+    if (stderr) console.log("shell error: " + stderr);
+}
+
+const pullAndFetch = ( directory ) => {
+    exec(`cd ${directory} && echo 'REPO: ${directory}' && git fetch --all && git pull`, handleGitCallback); 
+ };
+
+/* Section Four:
  *   Program Functions.
  */
 
@@ -123,8 +136,11 @@ const listDirs = (dir, cmd) => {
 };
 
 const superPull = (dir,cmd) => {
-    console.log(dir);
-    console.log(`${chalk.green('SuperPull')}!`);
+    console.log(`${chalk.green('SuperPull')} directories.\n`);
+    getArrayOfDirs().forEach( (dir,i) => {
+        pullAndFetch(dir);
+    } );
+
 };
 
 const main = (dir, cmd) => {
@@ -137,7 +153,7 @@ const main = (dir, cmd) => {
     }
 };
 
-/* Section Four:
+/* Section Five:
  *   Commander Initialization.
  */
 
