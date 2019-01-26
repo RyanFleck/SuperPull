@@ -86,13 +86,13 @@ const prettyPrintConfig = () => {
  */
 
 const handleGitCallback = ( err, stdout, stderr) => {
-    if (err) console.log("exec error: " + err);
+    if (err) console.log(err);
     if (stdout) console.log(stdout);
-    if (stderr) console.log("shell error: " + stderr);
+    if (stderr) console.log(stderr);
 }
 
 const pullAndFetch = ( directory ) => {
-    exec(`cd ${directory} && echo 'REPO: ${directory}' && git fetch --all && git pull`, handleGitCallback); 
+    exec(`cd ${directory} && pwd && git fetch --all && git pull`, handleGitCallback); 
  };
 
 /* Section Four:
