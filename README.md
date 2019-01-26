@@ -2,6 +2,10 @@
 
 CLI Program to pull repos and fetch remote branches for all paths in a config file.
 
+Docs at <https://ryanfleck.github.io/SuperPull/>
+
+First functional release completed in 4 hours on 2019-01-26.
+
 **Resources**
 
 1. [Chalk Documentation](https://github.com/chalk/chalk)
