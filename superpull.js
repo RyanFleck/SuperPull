@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-
 /*
  * SuperPull.js - Pull a managed list of repositories.
  *
- * Copyright (c) 2019 Ryan Fleck
+ * Copyright (c) 2019 Ryan Fleck - ryan.fleck@protonmail.com
  *
  * This file contains the entirety of the functional code for SuperPull.js.
  *
@@ -25,16 +24,27 @@
 
 const prog = require('commander');
 const chalk = require('chalk');
-const exec = require('child_process').exec;
 const fs = require('fs');
+const exec = require('child_process').exec;
+const config = require('os').homedir().concat('/.superpull');
 
 /* Section One:
  *   File processing tools.
  */
 
+const getArrayOfDirs = () => [];
+
 /* Section Two:
  *   Check for config file, create if not found.
  */
+
+if (!fs.existsSync(config)) {
+    console.log(`Superpull config ${chalk.red('missing')}! Adding at ${config}`);
+    fs.writeFileSync(config, '', 'utf8', (err) => {
+        console.log(`${chalk.red('Failed')} to write ~/.superpull\n${err}\nExiting...`);
+        process.exit();
+    });
+}
 
 /* Section Three:
  *   Program Functions.
