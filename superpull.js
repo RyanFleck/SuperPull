@@ -37,11 +37,11 @@ if (!fs.existsSync(config)) {
     console.log(`Superpull config ${chalk.red('missing')}! Adding at ${config}`);
     fs.writeFileSync(config, '', 'utf8', (err) => {
         console.log(`${chalk.red('Failed')} to write ~/.superpull\n${err}\nExiting...`);
-    process.exit();
+        process.exit(1);
     });
     console.log('Add current directory with:\n\n\tsuperpull -a\n');
     console.log('Add directory at a location with:\n\n\tsuperpull -a <full-path-to-directory>\n');
-    process.exit();
+    process.exit(0);
 }
 
 
@@ -49,13 +49,9 @@ if (!fs.existsSync(config)) {
  *   Configuration file processing tools.
  */
 
-const getArrayOfDirs = () => {
-    return fs.readFileSync(config).toString().split('\n').filter(x=>x!='');
-};
+const getArrayOfDirs = () => fs.readFileSync(config).toString().split('\n').filter(x => x != '');
 
-const checkIfAlreadyInFile = (fullpath) => {
-    return getArrayOfDirs().some(x => x === fullpath.trim());
-}
+const checkIfAlreadyInFile = fullpath => getArrayOfDirs().some(x => x === fullpath.trim());
 
 const addDirToConfig = (fullpath) => {
     fs.appendFileSync(config, '\n'.concat(fullpath.trim()), (e) => {
@@ -65,35 +61,35 @@ const addDirToConfig = (fullpath) => {
 };
 
 const dirIsGitRepo = (path) => {
-    try{
+    try {
         return (fs.statSync(path).isDirectory());
-    }catch(e){
+    } catch (e) {
         return false;
     }
-}
+};
 
 const prettyPrintConfig = () => {
     const msg = '\nSuperPull Repositories:\n';
-    console.log(msg+'-'.repeat(msg.trim().length));
-    getArrayOfDirs().forEach( (dir,i) => {
-        console.log(`${chalk.yellow(i)} ${chalk.green(path.basename(dir))} ${chalk.yellow('@')} ${dir}`); 
+    console.log(msg + '-'.repeat(msg.trim().length));
+    getArrayOfDirs().forEach((dir, i) => {
+        console.log(`${chalk.yellow(i)} ${chalk.green(path.basename(dir))} ${chalk.yellow('@')} ${dir}`);
     });
     console.log('\n');
-}
+};
 
 /* Section Three:
  *   Git functions.
  */
 
-const handleGitCallback = ( err, stdout, stderr) => {
+const handleGitCallback = (err, stdout, stderr) => {
     if (err) console.log(err);
     if (stdout) console.log(stdout);
     if (stderr) console.log(stderr);
-}
+};
 
-const pullAndFetch = ( directory ) => {
-    exec(`cd ${directory} && pwd && git fetch --all && git pull`, handleGitCallback); 
- };
+const pullAndFetch = (directory) => {
+    exec(`cd ${directory} && pwd && git fetch --all && git pull`, handleGitCallback);
+};
 
 /* Section Four:
  *   Program Functions.
@@ -103,28 +99,28 @@ const addDir = (dir, cmd) => {
     console.log(dir);
     console.log(`${chalk.red('Add Dir to Config')}!`);
     console.log(`Add is a string? >> ${(typeof dir.add === 'string')}`);
-    
-    let newDir = "";
-    
-    if (typeof dir.add === 'string'){
-        newDir = path.resolve(dir.add)
+
+    let newDir = '';
+
+    if (typeof dir.add === 'string') {
+        newDir = path.resolve(dir.add);
     } else {
         newDir = process.cwd();
     }
 
     console.log(`Adding ${newDir} to ~/.superpull`);
-    
-    if(!dirIsGitRepo(newDir.concat('/.git'))){
-        console.log(`Dir is ${chalk.red('NOT')} git repo.`); 
+
+    if (!dirIsGitRepo(newDir.concat('/.git'))) {
+        console.log(`Dir is ${chalk.red('NOT')} git repo.`);
         console.log(newDir);
         process.exit(1);
-    }else{
-        console.log('Dir is git repo.'); 
+    } else {
+        console.log('Dir is git repo.');
         console.log(newDir);
-        if(!checkIfAlreadyInFile(newDir)){
+        if (!checkIfAlreadyInFile(newDir)) {
             addDirToConfig(newDir);
-        }else{
-            console.log('Dir already in file!'); 
+        } else {
+            console.log('Dir already in file!');
             process.exit(1);
         }
         process.exit(0);
@@ -135,12 +131,11 @@ const listDirs = (dir, cmd) => {
     prettyPrintConfig();
 };
 
-const superPull = (dir,cmd) => {
+const superPull = (dir, cmd) => {
     console.log(`${chalk.green('SuperPull')} directories.\n`);
-    getArrayOfDirs().forEach( (dir,i) => {
+    getArrayOfDirs().forEach((dir, i) => {
         pullAndFetch(dir);
-    } );
-
+    });
 };
 
 const main = (dir, cmd) => {
