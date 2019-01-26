@@ -11,3 +11,8 @@
 - Run git commands in one directory. DONE.
 - Run git commands in all directories in config file. DONE.
 - Publish on NPM.
+
+
+**Next:**
+
+- Add automatic flag to search home directory for git repos.
