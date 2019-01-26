@@ -1,0 +1,18 @@
+theme: minimal
+
+name: SuperPull
+title: SuperPull
+descripton: SuperPull
+show_downloads: true
+
+# Setup
+title:        SuperPull
+tagline:      Tool for managing n git repos.
+locale:       "en"
+
+# About/contact
+author:
+  name:       Ryan Fleck
+  url:        http://ryanfleck.github.io
+
+markdown: kramdown
