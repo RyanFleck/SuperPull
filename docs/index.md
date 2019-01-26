@@ -13,11 +13,17 @@ Download the latest compiled binary for GNU/Linux [here](https://github.com/Ryan
 1. TOC
 {:toc}
 
+# Basic Usage
+
+1. Add directories to the config by executing `superpull -a` while in the directory, or `superpull -a <path>` from another location.
+2. Superpull all added repositories by executing `superpull`
+
+If directories have been added to your `~/.superpull` file, simply typing `superpull` in your shell will run the program, and output will show all successful and failed attepts to pull/fetch remote branches.
+
 # Installation
 
 Prerequisites:
 
-- NodeJS.
 - GNU/Linux OS.
 - Git
 
@@ -28,10 +34,6 @@ To install, simply download the latest compiled binary for GNU/Linux [here](http
 ```sh
 PATH="$HOME/bin:$PATH"
 ```
-
-# Basic Usage
-
-If directories have been added to your `~/.superpull` file, simply typing `superpull` in your shell will run the program, and output will show all successful and failed attepts to pull/fetch remote branches.
 
 # Flags
 
