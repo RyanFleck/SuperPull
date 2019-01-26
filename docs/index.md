@@ -42,3 +42,32 @@ Help.
 # Advanced Usage
 
 SuperPull currently has no advanced features.
+
+# Sample Output
+
+```sh
+rflec028@gnubox:~/SuperPull$ ./superpull.js
+SuperPull directories.
+
+/home/rflec028/ryanfleck.ca
+Fetching origin
+Already up-to-date.
+
+/home/rflec028/SuperPull
+Fetching origin
+Updating 84c7de2..789e21e
+Fast-forward
+ todo.md | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+From github.com:RyanFleck/SuperPull
+   84c7de2..789e21e  master     -> origin/master
+
+/home/rflec028/Projects
+Fetching origin
+Already up-to-date.
+
+/home/rflec028/ryanfleck.github.io
+Fetching origin
+Already up-to-date.
+```
