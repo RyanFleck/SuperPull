@@ -1,10 +1,10 @@
 # SuperPull
 
-CLI Program to pull repos and fetch remote branches for all paths in a config file.
+CLI Program to fetch remote branches and commits for a collection of local repositories.
 
-Docs at <https://ryanfleck.github.io/SuperPull/>
+Documentation available at <https://ryanfleck.github.io/SuperPull/>
 
-First functional release completed in 4 hours on 2019-01-26.
+First functional release completed in 4 hours on 2019-01-26, including a break for breakfast :D 
 
 **Resources**
 

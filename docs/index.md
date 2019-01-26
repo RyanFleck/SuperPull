@@ -23,51 +23,55 @@ If directories have been added to your `~/.superpull` file, simply typing `super
 
 # Flags
 
-`-a`
+`-a`  
+Adds the current directory to the `~/.superpull` file. Will throw an error if the directory is not a git repository, or already exists within the configuration file.
 
-Adds a repo.
+`-a <path>`  
+Adds the directory specified by `<path>` to the `~/.superpull` file. Will throw an error if the directory is not a git repository, or already exists within the configuration file.
 
-`-l`
+`-l` Lists configured repositories.
 
-Lists configured repos.
+`-V` Outputs program version.
 
-`-V`
-
-Outputs version.
-
-`-h`
-
-Help.
-
-# Advanced Usage
-
-SuperPull currently has no advanced features.
+`-h` Displays all commands.
 
 # Sample Output
 
+Run superpull:
+
 ```sh
-rflec028@gnubox:~/SuperPull$ ./superpull.js
+user@debian:~$ superpull
 SuperPull directories.
 
-/home/rflec028/ryanfleck.ca
+/home/user/Crusher
 Fetching origin
 Already up-to-date.
 
-/home/rflec028/SuperPull
-Fetching origin
-Updating 84c7de2..789e21e
-Fast-forward
- todo.md | 5 +++++
- 1 file changed, 5 insertions(+)
+From github.com:User/Crusher
+ * [new tag]         0.23        -> 0.23
+ 
+ /home/user/user.com
+ Fetching origin
+ Already up-to-date.
+ 
+ /home/user/Projects
+ Fetching origin
+ Already up-to-date.
+ 
+ /home/user/user.github.io
+ Fetching origin
+ Already up-to-date.
+```
 
-From github.com:RyanFleck/SuperPull
-   84c7de2..789e21e  master     -> origin/master
+List configured directories:
 
-/home/rflec028/Projects
-Fetching origin
-Already up-to-date.
+```sh
+user@debian:~$ superpull -l
+SuperPull Repositories:
+-----------------------
 
-/home/rflec028/ryanfleck.github.io
-Fetching origin
-Already up-to-date.
+0 Projects @ /home/user/Projects
+1 user.github.io @ /home/user/ryanfleck.github.io
+2 user.com @ /home/user/user.com
+3 Crusher @ /home/rflec028/Crusher
 ```
