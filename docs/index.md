@@ -37,17 +37,61 @@ PATH="$HOME/bin:$PATH"
 
 # Flags
 
-`-a`  
+**Add** `-a , --add `
+
 Adds the current directory to the `~/.superpull` file. Will throw an error if the directory is not a git repository, or already exists within the configuration file.
 
-`-a <path>`  
+```sh
+user@debian:~$ superpull -a
+Adding /home/user/currentdir to ~/.superpull
+```
+
+**Add** with path `-a <path> , --add <path> `
+
 Adds the directory specified by `<path>` to the `~/.superpull` file. Will throw an error if the directory is not a git repository, or already exists within the configuration file.
 
-`-l` Lists configured repositories.
+```sh
+user@debian:~$ superpull -a ProjectA
+Adding /home/user/ProjectA to ~/.superpull
+```
 
-`-V` Outputs program version.
+**List** `-l , --list `
 
-`-h` Displays all commands.
+Lists configured repositories.
+
+```sh
+superpull -l 
+
+SuperPull Repositories:
+-----------------------
+
+0 Projects @ /home/user/Projects
+1 user.github.io @ /home/user/user.github.io
+```
+
+**Version** `-V , --version ` 
+
+Outputs program version.
+
+```sh
+user@debian:~$ superpull -V
+1.1
+```
+
+**Help** `-h , --help `
+
+Displays all available commands in a help menu.
+
+```sh
+user@debian:~$ superpull -h
+Usage: superpull [options]
+
+Options:
+  -V, --version    output the version number
+  -l, --list       List configured repositories in config
+  -a, --add [dir]  Adds current or [specified] dir to config
+  -h, --help       output usage information
+```
 
 # Sample Output
 
@@ -85,7 +129,7 @@ SuperPull Repositories:
 -----------------------
 
 0 Projects @ /home/user/Projects
-1 user.github.io @ /home/user/ryanfleck.github.io
+1 user.github.io @ /home/user/user.github.io
 2 user.com @ /home/user/user.com
 3 Crusher @ /home/rflec028/Crusher
 ```
