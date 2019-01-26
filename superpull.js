@@ -1,37 +1,75 @@
 #!/usr/bin/env node
-'use strict';
+
+
+/*
+ * SuperPull.js - Pull a managed list of repositories.
+ *
+ * Copyright (c) 2019 Ryan Fleck
+ *
+ * This file contains the entirety of the functional code for SuperPull.js.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
 
 const prog = require('commander');
 const chalk = require('chalk');
+const exec = require('child_process').exec;
+const fs = require('fs');
 
-const add_dir = (dir, cmd) => {
-    console.log('ADD!');
+/* Section One:
+ *   File processing tools.
+ */
+
+/* Section Two:
+ *   Check for config file, create if not found.
+ */
+
+/* Section Three:
+ *   Program Functions.
+ */
+
+const addDir = (dir, cmd) => {
+    console.log(`${chalk.red('Add Dir to Config')}!`);
 };
 
-const list_dirs = (dir, cmd) => {
-    console.log('LIST!');
+const listDirs = (dir, cmd) => {
+    console.log(`${chalk.yellow('List Config Dirs')}!`);
 };
 
-const super_pull = () => {
-    console.log('SuperPull!');
-}
+const superPull = () => {
+    console.log(`${chalk.green('SuperPull')}!`);
+};
 
 const main = (dir, cmd) => {
-    if( prog.list ){
-        list_dirs(dir,cmd);
-    }
-    else if( prog.add ){
-        add_dir(dir,cmd);
+    if (prog.list) {
+        listDirs(dir, cmd);
+    } else if (prog.add) {
+        addDir(dir, cmd);
     } else {
-        super_pull(); 
+        superPull();
     }
 };
+
+/* Section Four:
+ *   Commander Initialization.
+ */
 
 prog
     .version('0.1')
-    .option('-l, --list','List configured repositories in config')
+    .option('-l, --list', 'List configured repositories in config')
     // .option('-c, --config','Print full path to config file to STDOUT.')
-    .option('-a, --add [dir]','Adds current or [specified] dir to config')
-    .action( main, 'SuperPulls all directories in config.')
+    .option('-a, --add [dir]', 'Adds current or [specified] dir to config')
+    .action(main, 'SuperPulls all directories in config.')
     .parse(process.argv);
-
