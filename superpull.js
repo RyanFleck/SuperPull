@@ -26,7 +26,7 @@ const prog = require('commander');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 const config = require('os').homedir().concat('/.superpull');
 
 /* Section One:
@@ -62,7 +62,7 @@ const addDirToConfig = (fullpath) => {
 
 const dirIsGitRepo = (gitrepo) => {
     try {
-        return (fs.statSync(gitrepo).isDirectory());
+        return (fs.statSync(gitrepo.concat('/.git')).isDirectory());
     } catch (e) {
         return false;
     }
@@ -78,7 +78,15 @@ const prettyPrintConfig = () => {
 };
 
 const fsChildDirs = ( directory ) => {
-   console.log(`fsChildDirs for ${directory}`); 
+    console.log(`fsChildDirs for ${directory}`);
+    return execSync(`cd ${directory} && ls -d */`)
+        .toString().split('\n')
+        .filter(x => x !== '')
+        .map(x => {
+            const y = directory.concat('/').concat(x);
+            console.log(y);
+            return y;
+        });
 };
 
 /* Section Three:
@@ -104,7 +112,7 @@ const addDir = (dir, cmd) => {
 
     console.log(`Adding ${newDir} to ~/.superpull`);
 
-    if (!dirIsGitRepo(newDir.concat('/.git'))) {
+    if (!dirIsGitRepo(newDir)) {
         console.log(`${chalk.red('Error')}: Directory ${newDir} is ${chalk.red('not')} a git repository.`);
         process.exit(1);
     } else {
@@ -123,8 +131,21 @@ const listDirs = (dir, cmd) => {
 };
 
 const crawlDir = (dir, cmd) => {
-    const opDir = (typeof dir.add === 'string') ? path.resolve(dir.add) : process.cwd();
-    console.log(fsChildDirs(opDir));
+    const opDir = (typeof dir.crawl === 'string') ? path.resolve(dir.crawl) : process.cwd();
+    const childDirs = fsChildDirs(opDir);
+    const childDirs_len = childDirs.length;
+    for( let x=0; x < childDirs_len; x++){
+        const dirIsRepo = dirIsGitRepo(childDirs[x]);
+        console.log(`Scanning ${childDirs[x]} ... ${dirIsRepo?chalk.green('true'):chalk.red('false')}`);
+        if(dirIsRepo){
+            if (!checkIfAlreadyInFile(childDirs[x])) {
+                addDirToConfig(childDirs[x]);
+                console.log(`-> ${chalk.green('Added')}: Directory ${childDirs[x]} appended to ~/.superpull`);
+            } else {
+                console.log(`-> Directory ${childDirs[x]} is already listed in ~/.superpull`);
+            }
+        }
+    }
 };
 
 const superPull = (dir, cmd) => {
