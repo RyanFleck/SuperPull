@@ -78,15 +78,10 @@ const prettyPrintConfig = () => {
 };
 
 const fsChildDirs = ( directory ) => {
-    console.log(`fsChildDirs for ${directory}`);
     return execSync(`cd ${directory} && ls -d */`)
         .toString().split('\n')
         .filter(x => x !== '')
-        .map(x => {
-            const y = directory.concat('/').concat(x);
-            console.log(y);
-            return y;
-        });
+        .map(x => directory.concat('/').concat(x));
 };
 
 /* Section Three:
