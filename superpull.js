@@ -77,6 +77,10 @@ const prettyPrintConfig = () => {
     console.log('\n');
 };
 
+const fsChildDirs = ( directory ) => {
+   console.log(`fsChildDirs for ${directory}`); 
+};
+
 /* Section Three:
  *   Git functions.
  */
@@ -118,6 +122,11 @@ const listDirs = (dir, cmd) => {
     prettyPrintConfig();
 };
 
+const crawlDir = (dir, cmd) => {
+    const opDir = (typeof dir.add === 'string') ? path.resolve(dir.add) : process.cwd();
+    console.log(fsChildDirs(opDir));
+};
+
 const superPull = (dir, cmd) => {
     console.log(`${chalk.green('SuperPull')} repositories.\n`);
     getArrayOfDirs().forEach((dir) => {
@@ -130,6 +139,8 @@ const main = (dir, cmd) => {
         listDirs(dir, cmd);
     } else if (prog.add) {
         addDir(dir, cmd);
+    } else if (prog.crawl) {
+        crawlDir(dir,cmd);
     } else {
         superPull();
     }
@@ -144,5 +155,6 @@ prog
     .option('-l, --list', 'List configured repositories in config')
     // .option('-c, --config','Print full path to config file to STDOUT.')
     .option('-a, --add [dir]', 'Adds current or [specified] dir to config')
+    .option('-c, --crawl [dir]', 'Searches current or [specified] dir for repositories')
     .action(main, 'SuperPulls all directories in config.')
     .parse(process.argv);
