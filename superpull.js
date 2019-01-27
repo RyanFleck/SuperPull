@@ -167,7 +167,7 @@ const main = (dir, cmd) => {
  */
 
 prog
-    .version('1.1')
+    .version('1.2')
     .option('-l, --list', 'List configured repositories in config')
     // .option('-c, --config','Print full path to config file to STDOUT.')
     .option('-a, --add [dir]', 'Adds current or [specified] dir to config')
