@@ -3,11 +3,15 @@ layout: default
 title: Home
 ---
 
-**SuperPull** is a CLI Application written in NodeJS for quickly bringing many local git repositories up to date. The project was created after searching on Github and failing to find a tool that did *exactly this*, though another program exists that clones all repos for a given user. I'm writing this program for myself, but have decided to place it on GitHub so others might see and use the tool.
+**SuperPull** is a CLI Application written in NodeJS for quickly bringing many local git repositories up to date. The project was created after searching on Github and failing to find a tool that did *exactly this*. I'm writing this program for myself, but have decided to place it on GitHub so others might see and use the tool.
+
+I use SuperPull like this:
+
+1. Run `superpull -c` to add all git repos in my home folder to `~/.superpull`
+2. Run `superpull` to pull new commits and fetch new remote branches for all repositories.
 
 Download the latest compiled binary for GNU/Linux [here](https://github.com/RyanFleck/SuperPull/releases/latest). 
 
-[![Build Status](https://travis-ci.com/RyanFleck/SuperPull.svg?branch=master)](https://travis-ci.com/RyanFleck/SuperPull)
 
 <h2>Contents</h2>
 1. TOC
@@ -54,13 +58,34 @@ Adds the directory specified by `<path>` to the `~/.superpull` file. Will throw 
 user@debian:~$ superpull -a ProjectA
 Adding /home/user/ProjectA to ~/.superpull
 ```
+**Crawl** `-c, --crawl `
+
+Checks all first-order sub-directories for git repositories and adds them to the `~/.superpull` file.
+
+```sh
+user@debian:~$ superpull -c
+Scanning /home/user/Calibre Library/ ... false
+Scanning /home/user/c-header-ci-test/ ... true
+-> Added: Directory /home/user/c-header-ci-test/ appended to ~/.superpull
+```
+
+**Crawl** `-c <path>, --crawl <path> `
+
+Checks all first-order sub-directories at `<path>` for git repositories and adds them to the `~/.superpull` file.
+
+```sh
+user@debian:~$ superpull -c Documents
+Scanning /home/user/Documents/ELG2138/ ... false
+Scanning /home/user/Documents/hyperledger/ ... true
+-> Added: Directory /home/user/Documents/hyperledger/ appended to ~/.superpull
+```
 
 **List** `-l , --list `
 
 Lists configured repositories.
 
 ```sh
-superpull -l 
+user@debian:~$ superpull -l 
 
 SuperPull Repositories:
 -----------------------
@@ -133,3 +158,9 @@ SuperPull Repositories:
 2 user.com @ /home/user/user.com
 3 Crusher @ /home/rflec028/Crusher
 ```
+
+<br />
+
+SuperPull is tested with *Travis CI*.
+
+[![Build Status](https://travis-ci.com/RyanFleck/SuperPull.svg?branch=master)](https://travis-ci.com/RyanFleck/SuperPull)

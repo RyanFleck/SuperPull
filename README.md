@@ -4,9 +4,15 @@
 
 CLI Program to fetch remote branches and commits for a collection of local repositories.
 
+Usage:
+
+1. Run `superpull -c` to add all git repos in my home folder to `~/.superpull`
+1. Run `superpull -a <path>` to add unique repositories at `<path>` 
+2. Run `superpull` to pull new commits and fetch new remote branches for all repositories
+
 Documentation available at <https://ryanfleck.github.io/SuperPull/>
 
-First functional release completed in 4 hours on 2019-01-26, including a break for breakfast :D 
+First functional release completed in **4** hours on 2019-01-26, including a break for breakfast :D 
 
 **Resources**
 
