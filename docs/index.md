@@ -7,7 +7,7 @@ title: Home
 
 I use SuperPull like this:
 
-1. Run `superpull -c` to add all git repos in my home folder to `~/.superpull`
+1. Run `superpull -c` to add all repos in my home folder.  
 2. Run `superpull` to pull new commits and fetch new remote branches for all repositories.
 
 Download the latest compiled binary for GNU/Linux [here](https://github.com/RyanFleck/SuperPull/releases/latest). 
@@ -19,10 +19,11 @@ Download the latest compiled binary for GNU/Linux [here](https://github.com/Ryan
 
 # Basic Usage
 
-1. Add directories to the config by executing `superpull -a` while in the directory, or `superpull -a <path>` from another location.
-2. Superpull all added repositories by executing `superpull`
+**Add** directories to the config by executing `superpull -a` while in the directory, or `superpull -a <path>` from another location.
 
-If directories have been added to your `~/.superpull` file, simply typing `superpull` in your shell will run the program, and output will show all successful and failed attepts to pull/fetch remote branches.
+**Crawl** child directories, adding each repository to the config, by executing `superpull -c` while in the directory you wish to crawl, or `superpull -c <path>` from another location.
+
+**SuperPull** all added repositories by executing `superpull`. Output will show all successful and failed attempts to pull/fetch remote branches.
 
 # Installation
 
