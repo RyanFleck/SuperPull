@@ -7,8 +7,8 @@ title: Home
 
 I use SuperPull like this:
 
-1. Run `superpull -c` to add all repos in my home folder.  
-2. Run `superpull` to pull new commits and fetch new remote branches for all repositories.
+1. Run `sp -c` to add all repos in my home folder.  
+2. Run `sp` to pull new commits and fetch new remote branches for all repositories.
 
 Download the latest compiled binary for GNU/Linux [here](https://github.com/RyanFleck/SuperPull/releases/latest). 
 
@@ -19,11 +19,11 @@ Download the latest compiled binary for GNU/Linux [here](https://github.com/Ryan
 
 # Basic Usage
 
-**Add** directories to the config by executing `superpull -a` while in the directory, or `superpull -a <path>` from another location.
+**Add** directories to the config by executing `sp -a` while in the directory, or `sp -a <path>` from another location.
 
-**Crawl** child directories, adding each repository to the config, by executing `superpull -c` while in the directory you wish to crawl, or `superpull -c <path>` from another location.
+**Crawl** child directories, adding each repository to the config, by executing `sp -c` while in the directory you wish to crawl, or `sp -c <path>` from another location.
 
-**SuperPull** all added repositories by executing `superpull`. Output will show all successful and failed attempts to pull/fetch remote branches.
+**SuperPull** all added repositories by executing `sp`. Output will show all successful and failed attempts to pull/fetch remote branches.
 
 # Installation
 
@@ -47,7 +47,7 @@ PATH="$HOME/bin:$PATH"
 Adds the current directory to the `~/.superpull` file. Will throw an error if the directory is not a git repository, or already exists within the configuration file.
 
 ```sh
-user@debian:~$ superpull -a
+user@debian:~$ sp -a
 Adding /home/user/currentdir to ~/.superpull
 ```
 
@@ -56,7 +56,7 @@ Adding /home/user/currentdir to ~/.superpull
 Adds the directory specified by `<path>` to the `~/.superpull` file. Will throw an error if the directory is not a git repository, or already exists within the configuration file.
 
 ```sh
-user@debian:~$ superpull -a ProjectA
+user@debian:~$ sp -a ProjectA
 Adding /home/user/ProjectA to ~/.superpull
 ```
 **Crawl** `-c, --crawl `
@@ -64,7 +64,7 @@ Adding /home/user/ProjectA to ~/.superpull
 Checks all first-order sub-directories for git repositories and adds them to the `~/.superpull` file.
 
 ```sh
-user@debian:~$ superpull -c
+user@debian:~$ sp -c
 Scanning /home/user/Calibre Library/ ... false
 Scanning /home/user/c-header-ci-test/ ... true
 -> Added: Directory /home/user/c-header-ci-test/ appended to ~/.superpull
@@ -75,7 +75,7 @@ Scanning /home/user/c-header-ci-test/ ... true
 Checks all first-order sub-directories at `<path>` for git repositories and adds them to the `~/.superpull` file.
 
 ```sh
-user@debian:~$ superpull -c Documents
+user@debian:~$ sp -c Documents
 Scanning /home/user/Documents/ELG2138/ ... false
 Scanning /home/user/Documents/hyperledger/ ... true
 -> Added: Directory /home/user/Documents/hyperledger/ appended to ~/.superpull
@@ -86,7 +86,7 @@ Scanning /home/user/Documents/hyperledger/ ... true
 Lists configured repositories.
 
 ```sh
-user@debian:~$ superpull -l 
+user@debian:~$ sp -l 
 
 SuperPull Repositories:
 -----------------------
@@ -100,7 +100,7 @@ SuperPull Repositories:
 Outputs program version.
 
 ```sh
-user@debian:~$ superpull -V
+user@debian:~$ sp -V
 1.1
 ```
 
@@ -109,8 +109,8 @@ user@debian:~$ superpull -V
 Displays all available commands in a help menu.
 
 ```sh
-user@debian:~$ superpull -h
-Usage: superpull [options]
+user@debian:~$ sp -h
+Usage: sp [options]
 
 Options:
   -V, --version    output the version number
@@ -124,7 +124,7 @@ Options:
 Run superpull:
 
 ```sh
-user@debian:~$ superpull
+user@debian:~$ sp
 SuperPull directories.
 
 /home/user/Crusher
@@ -150,7 +150,7 @@ From github.com:User/Crusher
 List configured directories:
 
 ```sh
-user@debian:~$ superpull -l
+user@debian:~$ sp -l
 SuperPull Repositories:
 -----------------------
 
