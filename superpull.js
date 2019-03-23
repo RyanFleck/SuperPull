@@ -78,6 +78,9 @@ const prettyPrintConfig = () => {
 };
 
 const fsChildDirs = ( directory ) => {
+    if( !fs.statSync( directory ).isDirectory() ){
+        return [];
+    } 
     return execSync(`cd ${directory} && ls -d */`)
         .toString().split('\n')
         .filter(x => x !== '')
@@ -95,6 +98,10 @@ const handleGitCallback = (err, stdout, stderr) => {
 };
 
 const pullAndFetch = (directory) => {
+    if( !fs.existsSync(directory) ){
+        console.log(`${chalk.red('Error')}: Directory ${directory} ${chalk.red('does not exist')}. Remove missing directory from superpull config at ~/.superpull\n`);
+        return(1);
+    } 
     exec(`cd ${directory} && pwd && git fetch --all && git pull`, handleGitCallback);
 };
 
