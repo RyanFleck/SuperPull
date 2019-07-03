@@ -4,6 +4,36 @@
 
 CLI Program to fetch remote branches and commits for a collection of local repositories. Small and well-documented.
 
+**Update 2019-07-03**
+
+As I improve as a developer, I get to experience the joy and horror of looking back on old projects. *SuperPull* completes a task that could be written far more clearly in ~20 lines of python, or even ~5, in a matter of minutes if you don't want to use a config file of directories or parse cli options. Something like:
+
+```py
+import os
+
+# Pull all git repositories in child directories of current directory.
+issue_dirs = []
+for dirname, subdirs, filenames in os.walk(os.getcwd()):
+    if '.git' in subdirs:
+        print("\nRepository: " + dirname)
+        output = os.system("cd " + dirname + " && git pull")
+        if(output != 0):
+            issue_dirs.append(dirname)
+
+# Inform user of directories that exited with errors or warnings.
+if(len(issue_dirs) > 0):
+    x = 0
+    print('\nErrors were thrown when attempting to pull ' +
+          str(len(issue_dirs)) + ' repositories:')
+    for repo in issue_dirs:
+        x = x + 1
+        print('\t' + str(x) + ': ' + repo)
+```
+
+*SuperPull* is an excellent example of massive and unnecessary complexity for a simple task. *Please don't use it.*
+
+<br />
+
 **Usage:**
 
 1. Run `sp -c` to add all git repos in my home folder to `~/.superpull`
